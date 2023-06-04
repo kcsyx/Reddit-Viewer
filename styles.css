@@ -15,6 +15,10 @@ body {
   width: 100%;
 }
 
+#subreddit-btn {
+  width: 100%;
+}
+
 .spinner-container {
   width: 100%;
   justify-content: center;
