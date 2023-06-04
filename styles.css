@@ -16,7 +16,8 @@ body {
 }
 
 #subreddit-btn {
-  width: 100%;
+  width: 50%;
+  float: right;
 }
 
 .spinner-container {
@@ -29,6 +30,16 @@ body {
 .btn-primary:hover,
 .btn-primary:active,
 .btn-primary:visited {
-  background-color: #ED001C !important;
+  background-color: #FF5700 !important;
   border: 0;
 }
+
+.form-group {
+  width: 50%;
+  float: left;
+}
+
+.col-form-label {
+  text-align: end;
+}
+
