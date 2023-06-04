@@ -1,0 +1,30 @@
+body {
+  width: 600px;
+}
+
+.card {
+  flex-direction: row;
+}
+
+.card img {
+  width: 30%;
+  object-fit: cover;
+}
+
+#btn {
+  width: 100%;
+}
+
+.spinner-container {
+  width: 100%;
+  justify-content: center;
+  display: flex;
+}
+
+.btn-primary,
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary:visited {
+  background-color: #ED001C !important;
+  border: 0;
+}

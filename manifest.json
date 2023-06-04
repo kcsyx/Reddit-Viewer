@@ -1,0 +1,14 @@
+{
+    "name": "Latest r/SG posts",
+    "version": "1.0.0",
+    "description": "Latest Singapore subreddit posts",
+    "manifest_version": 3,
+    "author": "Kieran Chai",
+    "action": {
+        "default_popup": "index.html",
+        "default_title": "Latest r/SG posts"
+    },
+    "icons": {
+        "32": "icon.png"
+    }
+}
