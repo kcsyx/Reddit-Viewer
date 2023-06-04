@@ -3,10 +3,13 @@ const placeHolderImage = "placeholder.png";
 const spoilerImage = "spoiler.png";
 const nsfwImage = "nsfw.png";
 var subreddit;
+var filter = "new";
+document.getElementById('btn-new').classList.add("btn-danger");
+
 if (localStorage.getItem("value")) {
     subreddit = localStorage.getItem("value");
-    showRefresh();
     fetchData(subreddit);
+    showButtons();
     document.getElementById("subreddit").placeholder = subreddit;
 }
 
@@ -14,12 +17,16 @@ function clearData() {
     document.querySelectorAll('.card').forEach(e => e.remove());
 }
 
-function showRefresh() {
+function showButtons() {
     document.getElementById('btn').style.display = 'inline-block';
+    document.getElementsByClassName('filter-container')[0].style.display = '';
 }
 
 document.addEventListener('DOMContentLoaded', function () {
     var btn = document.getElementById('subreddit-btn');
+    var filterTop = document.getElementById('btn-top');
+    var filterNew = document.getElementById('btn-new');
+    var filterHot = document.getElementById('btn-hot');
 
     btn.addEventListener('click', function () {
         if (document.getElementById("subreddit").value) {
@@ -31,14 +38,50 @@ document.addEventListener('DOMContentLoaded', function () {
             setTimeout(function () {
                 fetchData(subreddit);
                 hideLoader();
-                showRefresh();
+                showButtons();
             }, 1000);
         }
+    });
+
+    filterTop.addEventListener('click', function () {
+        clearData();
+        setTimeout(function () {
+            filter = "top";
+            document.getElementById('btn-top').classList.add("btn-danger");
+            document.getElementById('btn-new').classList.remove("btn-danger");
+            document.getElementById('btn-hot').classList.remove("btn-danger");
+            fetchData(subreddit);
+            showButtons();
+        }, 200)
+    });
+
+    filterHot.addEventListener('click', function () {
+        clearData();
+        setTimeout(function () {
+            filter = "hot";
+            document.getElementById('btn-top').classList.remove("btn-danger");
+            document.getElementById('btn-new').classList.remove("btn-danger");
+            document.getElementById('btn-hot').classList.add("btn-danger");
+            fetchData(subreddit);
+            showButtons();
+        }, 200)
+    });
+
+    filterNew.addEventListener('click', function () {
+        clearData();
+        setTimeout(function () {
+            filter = "new";
+            document.getElementById('btn-top').classList.remove("btn-danger");
+            document.getElementById('btn-new').classList.add("btn-danger");
+            document.getElementById('btn-hot').classList.remove("btn-danger");
+            fetchData(subreddit);
+            showButtons();
+        }, 200)
     });
 });
 
 async function fetchData(subreddit) {
-    const path = "http://www.reddit.com/r/" + `${subreddit}` + "/new.json?sort=new";
+    const path = "http://www.reddit.com/r/" + `${subreddit}` + "/" + `${filter}` + ".json?sort=" + `${filter}`;
     const res = await fetch(path);
     if (res.ok) {
         const record = await res.json();
@@ -83,22 +126,28 @@ async function fetchData(subreddit) {
                 video.style.width = '170px';
             } else {
                 var image = document.createElement("img");
-                if (record.data.children[i].data.thumbnail == "self" || record.data.children[i].data.thumbnail == "") {
-                    image.src = `${placeHolderImage}`;
-                    image.style.height = '170px';
-                    image.style.width = '170px';
-                } else if (record.data.children[i].data.thumbnail == "spoiler") {
-                    image.src = `${spoilerImage}`;
-                    image.style.height = '170px';
-                    image.style.width = '170px';
-                } else if (record.data.children[i].data.thumbnail == "nsfw") {
-                    image.src = `${nsfwImage}`;
-                    image.style.height = '170px';
-                    image.style.width = '170px';
-                } else {
-                    image.src = `${record.data.children[i].data.thumbnail}`;
-                    image.style.height = '170px';
-                    image.style.width = '170px';
+                switch (record.data.children[i].data.thumbnail) {
+                    case "self":
+                    case "":
+                    case "default":
+                        image.src = `${placeHolderImage}`;
+                        image.style.height = '170px';
+                        image.style.width = '170px';
+                        break;
+                    case "spoiler":
+                        image.src = `${spoilerImage}`;
+                        image.style.height = '170px';
+                        image.style.width = '170px';
+                        break;
+                    case "nsfw":
+                        image.src = `${nsfwImage}`;
+                        image.style.height = '170px';
+                        image.style.width = '170px';
+                        break;
+                    default:
+                        image.src = `${record.data.children[i].data.thumbnail}`;
+                        image.style.height = '170px';
+                        image.style.width = '170px';
                 }
                 card.appendChild(image);
                 image.className = "card-img-top";

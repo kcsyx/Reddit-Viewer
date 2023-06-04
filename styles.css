@@ -43,3 +43,13 @@ body {
   text-align: end;
 }
 
+.filter-container{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.filter-btn {
+  width: 33%;
+  margin: 10px;
+}
