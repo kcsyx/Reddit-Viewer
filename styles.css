@@ -2,6 +2,10 @@ body {
   width: 600px;
 }
 
+form {
+  margin-top: 10px;
+}
+
 .card {
   flex-direction: row;
 }
@@ -52,4 +56,24 @@ body {
 .filter-btn {
   width: 33%;
   margin: 10px;
+}
+
+.btn-main {
+  background-color: black;
+  color: white;
+}
+
+.btn {
+  border-radius: 0 !important;
+}
+
+.btn-main:hover{
+  color: white;
+  font-weight: 600;
+}
+
+.btn-focus {
+  background-color: #FF5700;
+  color: white;
+  font-weight: 600;
 }

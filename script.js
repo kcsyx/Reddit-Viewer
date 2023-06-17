@@ -4,7 +4,7 @@ const spoilerImage = "spoiler.png";
 const nsfwImage = "nsfw.png";
 var subreddit;
 var filter = "new";
-document.getElementById('btn-new').classList.add("btn-danger");
+document.getElementById('btn-new').classList.add("btn-focus");
 
 if (localStorage.getItem("value")) {
     subreddit = localStorage.getItem("value");
@@ -47,9 +47,9 @@ document.addEventListener('DOMContentLoaded', function () {
         clearData();
         setTimeout(function () {
             filter = "top";
-            document.getElementById('btn-top').classList.add("btn-danger");
-            document.getElementById('btn-new').classList.remove("btn-danger");
-            document.getElementById('btn-hot').classList.remove("btn-danger");
+            document.getElementById('btn-top').classList.add("btn-focus");
+            document.getElementById('btn-new').classList.remove("btn-focus");
+            document.getElementById('btn-hot').classList.remove("btn-focus");
             fetchData(subreddit);
             showButtons();
         }, 200)
@@ -59,9 +59,9 @@ document.addEventListener('DOMContentLoaded', function () {
         clearData();
         setTimeout(function () {
             filter = "hot";
-            document.getElementById('btn-top').classList.remove("btn-danger");
-            document.getElementById('btn-new').classList.remove("btn-danger");
-            document.getElementById('btn-hot').classList.add("btn-danger");
+            document.getElementById('btn-top').classList.remove("btn-focus");
+            document.getElementById('btn-new').classList.remove("btn-focus");
+            document.getElementById('btn-hot').classList.add("btn-focus");
             fetchData(subreddit);
             showButtons();
         }, 200)
@@ -71,9 +71,9 @@ document.addEventListener('DOMContentLoaded', function () {
         clearData();
         setTimeout(function () {
             filter = "new";
-            document.getElementById('btn-top').classList.remove("btn-danger");
-            document.getElementById('btn-new').classList.add("btn-danger");
-            document.getElementById('btn-hot').classList.remove("btn-danger");
+            document.getElementById('btn-top').classList.remove("btn-focus");
+            document.getElementById('btn-new').classList.add("btn-focus");
+            document.getElementById('btn-hot').classList.remove("btn-focus");
             fetchData(subreddit);
             showButtons();
         }, 200)
